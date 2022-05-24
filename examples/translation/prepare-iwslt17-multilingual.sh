@@ -5,9 +5,10 @@
 # This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree.
 
+
 SRCS=(
     "de"
-    "fr"
+    # "fr"
 )
 TGT=en
 
@@ -25,12 +26,13 @@ TRAIN_MINLEN=1  # remove sentences with <1 BPE token
 TRAIN_MAXLEN=250  # remove sentences with >250 BPE tokens
 
 URLS=(
-    "https://wit3.fbk.eu/archive/2017-01-trnted/texts/de/en/de-en.tgz"
-    "https://wit3.fbk.eu/archive/2017-01-trnted/texts/fr/en/fr-en.tgz"
+    # "https://wit3.fbk.eu/archive/2017-01-trnted/texts/de/en/de-en.tgz"
+    # "https://wit3.fbk.eu/archive/2017-01-trnted/texts/fr/en/fr-en.tgz"
+    "https://drive.google.com/u/0/uc?id=12ycYSzLIG253AFN35Y6qoyf9wtkOjakp&export=download"
 )
 ARCHIVES=(
     "de-en.tgz"
-    "fr-en.tgz"
+    # "fr-en.tgz"
 )
 VALID_SETS=(
     "IWSLT17.TED.dev2010.de-en IWSLT17.TED.tst2010.de-en IWSLT17.TED.tst2011.de-en IWSLT17.TED.tst2012.de-en IWSLT17.TED.tst2013.de-en IWSLT17.TED.tst2014.de-en IWSLT17.TED.tst2015.de-en"
@@ -38,13 +40,15 @@ VALID_SETS=(
 )
 
 # download and extract data
+pip install gdown
 for ((i=0;i<${#URLS[@]};++i)); do
     ARCHIVE=$ORIG/${ARCHIVES[i]}
     if [ -f "$ARCHIVE" ]; then
         echo "$ARCHIVE already exists, skipping download"
     else
         URL=${URLS[i]}
-        wget -P "$ORIG" "$URL"
+        gdown "$URL"
+        # wget -P "$ORIG" "$URL"
         if [ -f "$ARCHIVE" ]; then
             echo "$URL successfully downloaded."
         else
@@ -124,7 +128,7 @@ for ((i=0;i<${#SRCS[@]};++i)); do
     SRC=${SRCS[i]}
     VALID_SET=(${VALID_SETS[i]})
     for ((j=0;j<${#VALID_SET[@]};++j)); do
-        python "$SPM_ENCODE" \
+        python3 "$SPM_ENCODE" \
             --model "$DATA/sentencepiece.bpe.model" \
             --output_format=piece \
             --inputs $DATA/valid${j}.${SRC}-${TGT}.${SRC} $DATA/valid${j}.${SRC}-${TGT}.${TGT} \

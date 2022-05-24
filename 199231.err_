@@ -1,0 +1,5 @@
+/mnt/beegfs/home/khater/.local/lib/python3.7/site-packages/torch/autocast_mode.py:162: UserWarning: User provided device_type of 'cuda', but CUDA is not available. Disabling
+  warnings.warn('User provided device_type of \'cuda\', but CUDA is not available. Disabling')
+/mnt/beegfs/home/khater/.local/lib/python3.7/site-packages/torch/nn/modules/module.py:1008: UserWarning: Using non-full backward hooks on a Module that does not take as input a single Tensor or a tuple of Tensors is deprecated and will be removed in future versions. This hook will be missing some of the grad_input. Please use register_full_backward_hook to get the documented behavior.
+  warnings.warn("Using non-full backward hooks on a Module that does not take as input a "
+slurmstepd: error: *** JOB 199231 ON n1 CANCELLED AT 2022-05-24T04:08:50 DUE TO TIME LIMIT ***
